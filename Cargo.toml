@@ -1,0 +1,16 @@
+[package]
+name = "knx-xml"
+version = "0.1.0"
+description = "A library for reading KNX project XML files."
+edition = "2021"
+license = "MIT"
+homepage = "https://github.com/marcelbuesing/knx-xml"
+repository = "https://github.com/marcelbuesing/knx-xml.git"
+authors = ["marcelbuesing <buesing.marcel@googlemail.com>"]
+keywords = ["knx"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+yaserde = "0.10.0"
+yaserde_derive = "0.10.0"
