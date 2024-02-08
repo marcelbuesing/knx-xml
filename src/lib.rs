@@ -1,6 +1,6 @@
 //!
 //! A library for reading KNX project XML files.
-//! 
+//!
 //! ```rust
 //! use knx_xml::KNX;
 //! use std::fs;
@@ -729,11 +729,13 @@ pub struct PublicKeys {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct Manufacturer {
     #[yaserde(attribute, rename = "Id")]
-    pub id: String,
+    pub id: Option<String>,
+    #[yaserde(attribute, rename = "RefId")]
+    pub ref_id: Option<String>,
     #[yaserde(attribute, rename = "Name")]
-    pub name: String,
+    pub name: Option<String>,
     #[yaserde(attribute, rename = "KnxManufacturerId")]
-    pub knx_manufacturer_id: u16,
+    pub knx_manufacturer_id: Option<u16>,
     #[yaserde(attribute, rename = "DefaultLanguage")]
     pub default_language: Option<String>,
     #[yaserde(attribute, rename = "CompatibilityGroup")]
@@ -754,6 +756,8 @@ pub struct Manufacturer {
     pub function_types: Option<FunctionTypes>,
     #[yaserde(rename = "SpaceUsages")]
     pub space_usages: Option<SpaceUsages>,
+    #[yaserde(rename = "ApplicationPrograms")]
+    pub application_programs: Option<ApplicationPrograms>,
 }
 
 // Manufacturers ...
@@ -1510,18 +1514,18 @@ pub struct AbsoluteSegment {
     pub name: Option<String>,
     #[yaserde(rename = "MemoryType")]
     pub memory_type: Option<String>,
-    #[yaserde(rename = "Address")]
+    #[yaserde(attribute, rename = "Address")]
     pub address: u32,
-    #[yaserde(rename = "Size")]
+    #[yaserde(attribute, rename = "Size")]
     pub size: u32,
     #[yaserde(rename = "UserMemory")]
     pub user_memory: Option<bool>,
     #[yaserde(rename = "InternalDescription")]
     pub internal_description: Option<String>,
     #[yaserde(rename = "Data")]
-    pub data: String,
+    pub data: Option<String>,
     #[yaserde(rename = "Mask")]
-    pub mask: String,
+    pub mask: Option<String>,
 }
 
 // RelativeSegment ...
@@ -2636,13 +2640,13 @@ pub struct BinaryDatat {
 #[derive(Debug, Default, Clone, YaDeserialize, YaSerialize, PartialEq)]
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct TypeNumber {
-    #[yaserde(rename = "SizeInBit")]
+    #[yaserde(attribute, rename = "SizeInBit")]
     pub size_in_bit: u8,
-    #[yaserde(rename = "Type")]
+    #[yaserde(attribute, rename = "Type")]
     pub type_attr: String,
-    #[yaserde(rename = "minInclusive")]
+    #[yaserde(attribute, rename = "minInclusive")]
     pub min_inclusive: i64,
-    #[yaserde(rename = "maxInclusive")]
+    #[yaserde(attribute, rename = "maxInclusive")]
     pub max_inclusive: i64,
     #[yaserde(rename = "Increment")]
     pub increment: Option<i64>,
@@ -2654,11 +2658,11 @@ pub struct TypeNumber {
 #[derive(Debug, Default, Clone, YaDeserialize, YaSerialize, PartialEq)]
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct TypeFloat {
-    #[yaserde(rename = "Encoding")]
+    #[yaserde(attribute, rename = "Encoding")]
     pub encoding: String,
-    #[yaserde(rename = "minInclusive")]
+    #[yaserde(attribute, rename = "minInclusive")]
     pub min_inclusive: f64,
-    #[yaserde(rename = "maxInclusive")]
+    #[yaserde(attribute, rename = "maxInclusive")]
     pub max_inclusive: f64,
     #[yaserde(rename = "Increment")]
     pub increment: Option<f64>,
@@ -2672,19 +2676,32 @@ pub struct TypeFloat {
 #[derive(Debug, Default, Clone, YaDeserialize, YaSerialize, PartialEq)]
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct TypeRestriction {
-    #[yaserde(rename = "Base")]
+    #[yaserde(attribute, rename = "Base")]
     pub base: String,
-    #[yaserde(rename = "SizeInBit")]
+    #[yaserde(attribute, rename = "SizeInBit")]
     pub size_in_bit: u8,
-    #[yaserde(rename = "Offset")]
+    #[yaserde(attribute, rename = "Offset")]
     pub offset: Vec<u32>,
+    #[yaserde(rename = "Enumeration")]
+    pub enumeration: Vec<TypeRestrictionEnumeration>,
+}
+
+#[derive(Debug, Default, Clone, YaDeserialize, YaSerialize, PartialEq)]
+#[yaserde(namespace = "http://knx.org/xml/project/20")]
+pub struct TypeRestrictionEnumeration {
+    #[yaserde(attribute, rename = "Text")]
+    pub text: String,
+    #[yaserde(attribute, rename = "Value")]
+    pub value: i64,
+    #[yaserde(attribute, rename = "Id")]
+    pub id: String,
 }
 
 // TypeText ...
 #[derive(Debug, Default, Clone, YaDeserialize, YaSerialize, PartialEq)]
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct TypeText {
-    #[yaserde(rename = "SizeInBit")]
+    #[yaserde(attribute, rename = "SizeInBit")]
     pub size_in_bit: u8,
     #[yaserde(rename = "Pattern")]
     pub pattern: Option<String>,
@@ -2694,13 +2711,13 @@ pub struct TypeText {
 #[derive(Debug, Default, Clone, YaDeserialize, YaSerialize, PartialEq)]
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct TypeTime {
-    #[yaserde(rename = "SizeInBit")]
+    #[yaserde(rattribute, ename = "SizeInBit")]
     pub size_in_bit: u8,
-    #[yaserde(rename = "Unit")]
+    #[yaserde(attribute, rename = "Unit")]
     pub unit: String,
-    #[yaserde(rename = "minInclusive")]
+    #[yaserde(attribute, rename = "minInclusive")]
     pub min_inclusive: i64,
-    #[yaserde(rename = "maxInclusive")]
+    #[yaserde(attribute, rename = "maxInclusive")]
     pub max_inclusive: i64,
     #[yaserde(rename = "UIHint")]
     pub ui_hint: Option<String>,
@@ -2710,7 +2727,7 @@ pub struct TypeTime {
 #[derive(Debug, Default, Clone, YaDeserialize, YaSerialize, PartialEq)]
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct TypeDate {
-    #[yaserde(rename = "Encoding")]
+    #[yaserde(attribute, rename = "Encoding")]
     pub encoding: String,
     #[yaserde(rename = "DisplayTheYear")]
     pub display_the_year: Option<bool>,
@@ -2740,7 +2757,7 @@ pub struct TypePicture {
 #[derive(Debug, Default, Clone, YaDeserialize, YaSerialize, PartialEq)]
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct TypeColor {
-    #[yaserde(rename = "Space")]
+    #[yaserde(attribute, rename = "Space")]
     pub space: String,
 }
 
@@ -2748,7 +2765,7 @@ pub struct TypeColor {
 #[derive(Debug, Default, Clone, YaDeserialize, YaSerialize, PartialEq)]
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct TypeRawData {
-    #[yaserde(rename = "MaxSize")]
+    #[yaserde(attribute, rename = "MaxSize")]
     pub max_size: u8,
 }
 
@@ -2767,25 +2784,25 @@ pub struct ParameterTypet {
     #[yaserde(rename = "ValidationErrorRef")]
     pub validation_error_ref: Option<String>,
     #[yaserde(rename = "TypeNumber")]
-    pub type_number: TypeNumber,
+    pub type_number: Option<TypeNumber>,
     #[yaserde(rename = "TypeFloat")]
-    pub type_float: TypeFloat,
+    pub type_float: Option<TypeFloat>,
     #[yaserde(rename = "TypeRestriction")]
-    pub type_restriction: TypeRestriction,
+    pub type_restriction: Option<TypeRestriction>,
     #[yaserde(rename = "TypeText")]
-    pub type_text: TypeText,
+    pub type_text: Option<TypeText>,
     #[yaserde(rename = "TypeTime")]
-    pub type_time: TypeTime,
+    pub type_time: Option<TypeTime>,
     #[yaserde(rename = "TypeDate")]
-    pub type_date: TypeDate,
+    pub type_date: Option<TypeDate>,
     #[yaserde(rename = "TypeIPAddress")]
-    pub type_ip_address: TypeIPAddress,
+    pub type_ip_address: Option<TypeIPAddress>,
     #[yaserde(rename = "TypePicture")]
-    pub type_picture: TypePicture,
+    pub type_picture: Option<TypePicture>,
     #[yaserde(rename = "TypeColor")]
-    pub type_color: TypeColor,
+    pub type_color: Option<TypeColor>,
     #[yaserde(rename = "TypeRawData")]
-    pub type_raw_data: TypeRawData,
+    pub type_raw_data: Option<TypeRawData>,
     // #[yaserde(rename = "TypeNone")]
     // pub type_none: TypeNone,
 }
