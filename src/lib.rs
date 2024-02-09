@@ -147,7 +147,7 @@ pub struct Conditiont {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct BitOffsett {
     #[yaserde(rename = "BitOffset_t")]
-    pub bit_offset_t: u8,
+    pub bit_offset_t: u16,
 }
 
 // HardwareVersionNumber ...
@@ -163,7 +163,7 @@ pub struct HardwareVersionNumber {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct AccessLevelt {
     #[yaserde(rename = "AccessLevel_t")]
-    pub access_level_t: u8,
+    pub access_level_t: u16,
 }
 
 // FloatFormatt ...
@@ -575,7 +575,7 @@ pub struct PropertyDataType {
     #[yaserde(rename = "Size")]
     pub size: Option<u32>,
     #[yaserde(rename = "ReadSize")]
-    pub read_size: Option<u8>,
+    pub read_size: Option<u16>,
 }
 
 // PropertyDataTypes ...
@@ -623,7 +623,7 @@ pub struct MaskVersions {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct Parameter {
     #[yaserde(attribute, rename = "Property")]
-    pub property: String,
+    pub property: Option<String>,
     #[yaserde(attribute, rename = "Description")]
     pub description: Option<String>,
 }
@@ -633,7 +633,7 @@ pub struct Parameter {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct Parameters {
     #[yaserde(attribute, rename = "ObjectType")]
-    pub object_type: String,
+    pub object_type: Option<String>,
     #[yaserde(rename = "Parameter")]
     pub parameter: Vec<Parameter>,
 }
@@ -1115,7 +1115,7 @@ pub struct ResourceLocationt {
     #[yaserde(attribute, rename = "StartAddress")]
     pub start_address: Option<u32>,
     #[yaserde(attribute, rename = "Occurrence")]
-    pub occurrence: Option<u8>,
+    pub occurrence: Option<u16>,
     #[yaserde(attribute, rename = "PtrResource")]
     pub ptr_resource: Option<String>,
 }
@@ -1247,7 +1247,7 @@ pub struct Property {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct InterfaceObject {
     #[yaserde(attribute, rename = "Index")]
-    pub index: Option<u8>,
+    pub index: Option<u16>,
     #[yaserde(attribute, rename = "ObjectType")]
     pub object_type: u16,
     #[yaserde(rename = "Property")]
@@ -1374,13 +1374,13 @@ pub struct ApplicationPrograms {
 #[derive(Debug, Default, Clone, YaDeserialize, YaSerialize, PartialEq)]
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct FileInfo {
-    #[yaserde(rename = "Version")]
+    #[yaserde(attribute, rename = "Version")]
     pub version: Option<String>,
-    #[yaserde(rename = "TimeInfo")]
-    pub time_info: Option<u8>,
-    #[yaserde(rename = "Hidden")]
+    #[yaserde(attribute, rename = "TimeInfo")]
+    pub time_info: Option<u16>,
+    #[yaserde(attribute, rename = "Hidden")]
     pub hidden: Option<bool>,
-    #[yaserde(rename = "ReadOnly")]
+    #[yaserde(attribute, rename = "ReadOnly")]
     pub read_only: Option<bool>,
 }
 
@@ -1388,7 +1388,7 @@ pub struct FileInfo {
 #[derive(Debug, Default, Clone, YaDeserialize, YaSerialize, PartialEq)]
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct Baggage {
-    #[yaserde(rename = "TargetPath")]
+    #[yaserde(attribute, rename = "TargetPath")]
     pub target_path: String,
     #[yaserde(attribute, rename = "Name")]
     pub name: String,
@@ -1430,73 +1430,73 @@ pub struct ManufacturerDatat {
 pub struct ApplicationProgramt {
     #[yaserde(attribute, rename = "Id")]
     pub id: String,
-    #[yaserde(rename = "ApplicationNumber")]
+    #[yaserde(attribute, rename = "ApplicationNumber")]
     pub application_number: u16,
-    #[yaserde(rename = "ApplicationVersion")]
-    pub application_version: u8,
-    #[yaserde(rename = "ProgramType")]
+    #[yaserde(attribute, rename = "ApplicationVersion")]
+    pub application_version: u16,
+    #[yaserde(attribute, rename = "ProgramType")]
     pub program_type: String,
-    #[yaserde(rename = "MaskVersion")]
+    #[yaserde(attribute, rename = "MaskVersion")]
     pub mask_version: String,
-    #[yaserde(rename = "VisibleDescription")]
+    #[yaserde(attribute, rename = "VisibleDescription")]
     pub visible_description: Option<String>,
     #[yaserde(attribute, rename = "Name")]
     pub name: String,
-    #[yaserde(rename = "LoadProcedureStyle")]
+    #[yaserde(attribute, rename = "LoadProcedureStyle")]
     pub load_procedure_style: String,
-    #[yaserde(rename = "PeiType")]
-    pub pei_type: u8,
-    #[yaserde(rename = "HelpTopic")]
+    #[yaserde(attribute, rename = "PeiType")]
+    pub pei_type: u16,
+    #[yaserde(attribute, rename = "HelpTopic")]
     pub help_topic: Option<u32>,
-    #[yaserde(rename = "HelpFile")]
+    #[yaserde(attribute, rename = "HelpFile")]
     pub help_file: Option<String>,
-    #[yaserde(rename = "ContextHelpFile")]
+    #[yaserde(attribute, rename = "ContextHelpFile")]
     pub context_help_file: Option<String>,
-    #[yaserde(rename = "IconFile")]
+    #[yaserde(attribute, rename = "IconFile")]
     pub icon_file: Option<String>,
-    #[yaserde(rename = "DefaultLanguage")]
+    #[yaserde(attribute, rename = "DefaultLanguage")]
     pub default_language: String,
-    #[yaserde(rename = "DynamicTableManagement")]
+    #[yaserde(attribute, rename = "DynamicTableManagement")]
     pub dynamic_table_management: bool,
-    #[yaserde(rename = "Linkable")]
+    #[yaserde(attribute, rename = "Linkable")]
     pub linkable: bool,
-    #[yaserde(rename = "IsSecureEnabled")]
+    #[yaserde(attribute, ename = "IsSecureEnabled")]
     pub is_secure_enabled: Option<bool>,
-    #[yaserde(rename = "MinEtsVersion")]
+    #[yaserde(attribute, rename = "MinEtsVersion")]
     pub min_ets_version: Option<String>,
-    #[yaserde(rename = "OriginalManufacturer")]
+    #[yaserde(attribute, rename = "OriginalManufacturer")]
     pub original_manufacturer: Option<String>,
-    #[yaserde(rename = "PreEts4Style")]
+    #[yaserde(attribute, rename = "PreEts4Style")]
     pub pre_ets4_style: Option<bool>,
-    #[yaserde(rename = "ConvertedFromPreEts4Data")]
+    #[yaserde(attribute, rename = "ConvertedFromPreEts4Data")]
     pub converted_from_pre_ets4_data: Option<bool>,
-    #[yaserde(rename = "CreatedFromLegacySchemaVersion")]
+    #[yaserde(attribute, rename = "CreatedFromLegacySchemaVersion")]
     pub created_from_legacy_schema_version: Option<bool>,
-    #[yaserde(rename = "IPConfig")]
+    #[yaserde(attribute, rename = "IPConfig")]
     pub ip_config: Option<String>,
-    #[yaserde(rename = "AdditionalAddressesCount")]
+    #[yaserde(attribute, rename = "AdditionalAddressesCount")]
     pub additional_addresses_count: Option<i32>,
-    #[yaserde(rename = "MaxUserEntries")]
+    #[yaserde(attribute, rename = "MaxUserEntries")]
     pub max_user_entries: Option<u16>,
-    #[yaserde(rename = "MaxTunnelingUserEntries")]
+    #[yaserde(attribute, rename = "MaxTunnelingUserEntries")]
     pub max_tunneling_user_entries: Option<u16>,
-    #[yaserde(rename = "MaxSecurityIndividualAddressEntries")]
+    #[yaserde(attribute, rename = "MaxSecurityIndividualAddressEntries")]
     pub max_security_individual_address_entries: Option<u16>,
-    #[yaserde(rename = "MaxSecurityGroupKeyTableEntries")]
+    #[yaserde(attribute, rename = "MaxSecurityGroupKeyTableEntries")]
     pub max_security_group_key_table_entries: Option<u16>,
-    #[yaserde(rename = "MaxSecurityP2PKeyTableEntries")]
+    #[yaserde(attribute, rename = "MaxSecurityP2PKeyTableEntries")]
     pub max_security_p2_p_key_table_entries: Option<u16>,
-    #[yaserde(rename = "NonRegRelevantDataVersion")]
+    #[yaserde(attribute, rename = "NonRegRelevantDataVersion")]
     pub non_reg_relevant_data_version: Option<u16>,
-    #[yaserde(rename = "Broken")]
+    #[yaserde(attribute, rename = "Broken")]
     pub broken: Option<bool>,
-    #[yaserde(rename = "DownloadInfoIncomplete")]
+    #[yaserde(attribute, rename = "DownloadInfoIncomplete")]
     pub download_info_incomplete: Option<bool>,
-    #[yaserde(rename = "ReplacesVersions")]
-    pub replaces_versions: Option<u8>,
-    #[yaserde(rename = "Hash")]
+    #[yaserde(attribute, rename = "ReplacesVersions")]
+    pub replaces_versions: Option<u16>,
+    #[yaserde(attribute, rename = "Hash")]
     pub hash: Option<String>,
-    #[yaserde(rename = "InternalDescription")]
+    #[yaserde(attribute, rename = "InternalDescription")]
     pub internal_description: Option<String>,
     #[yaserde(rename = "Static")]
     pub static_attr: ApplicationProgramStatict,
@@ -1541,7 +1541,7 @@ pub struct RelativeSegment {
     #[yaserde(rename = "Size")]
     pub size: u32,
     #[yaserde(rename = "LoadStateMachine")]
-    pub load_state_machine: u8,
+    pub load_state_machine: u16,
     #[yaserde(rename = "InternalDescription")]
     pub internal_description: Option<String>,
     #[yaserde(rename = "Data")]
@@ -1577,7 +1577,7 @@ pub struct Memory {
     #[yaserde(rename = "Offset")]
     pub offset: u32,
     #[yaserde(rename = "BitOffset")]
-    pub bit_offset: u8,
+    pub bit_offset: u16,
 }
 
 // Union ...
@@ -1648,11 +1648,11 @@ pub struct ComObjectRefs {
 #[derive(Debug, Default, Clone, YaDeserialize, YaSerialize, PartialEq)]
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct AddressTable {
-    #[yaserde(rename = "CodeSegment")]
+    #[yaserde(attribute, rename = "CodeSegment")]
     pub code_segment: Option<String>,
-    #[yaserde(rename = "Offset")]
+    #[yaserde(attribute, rename = "Offset")]
     pub offset: Option<u32>,
-    #[yaserde(rename = "MaxEntries")]
+    #[yaserde(attribute, rename = "MaxEntries")]
     pub max_entries: u32,
 }
 
@@ -1660,11 +1660,11 @@ pub struct AddressTable {
 #[derive(Debug, Default, Clone, YaDeserialize, YaSerialize, PartialEq)]
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct AssociationTable {
-    #[yaserde(rename = "CodeSegment")]
+    #[yaserde(attribute, rename = "CodeSegment")]
     pub code_segment: Option<String>,
-    #[yaserde(rename = "Offset")]
+    #[yaserde(attribute, rename = "Offset")]
     pub offset: Option<u32>,
-    #[yaserde(rename = "MaxEntries")]
+    #[yaserde(attribute, rename = "MaxEntries")]
     pub max_entries: u32,
 }
 
@@ -1680,18 +1680,25 @@ pub struct FixupList {
 #[derive(Debug, Default, Clone, YaDeserialize, YaSerialize, PartialEq)]
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct Extension {
-    #[yaserde(rename = "EtsDownloadPlugin")]
+    #[yaserde(attribute, rename = "EtsDownloadPlugin")]
     pub ets_download_plugin: Option<String>,
-    #[yaserde(rename = "EtsUiPlugin")]
+    #[yaserde(attribute, rename = "EtsUiPlugin")]
     pub ets_ui_plugin: Option<String>,
-    #[yaserde(rename = "EtsDataHandler")]
+    #[yaserde(attribute, rename = "EtsDataHandler")]
     pub ets_data_handler: Option<String>,
-    #[yaserde(rename = "EtsDataHandlerCapabilities")]
+    #[yaserde(attribute, rename = "EtsDataHandlerCapabilities")]
     pub ets_data_handler_capabilities: Option<Capabilitiest>,
-    #[yaserde(rename = "RequiresExternalSoftware")]
+    #[yaserde(attribute, rename = "RequiresExternalSoftware")]
     pub requires_external_software: Option<bool>,
     #[yaserde(rename = "Baggage")]
-    pub baggage: Vec<Baggage>,
+    pub baggage: Vec<BaggageExtension>,
+}
+
+#[derive(Debug, Default, Clone, YaDeserialize, YaSerialize, PartialEq)]
+#[yaserde(namespace = "http://knx.org/xml/project/20")]
+pub struct BaggageExtension {
+    #[yaserde(attribute, rename = "RefId")]
+    pub ref_id: String,
 }
 
 // BinaryData ...
@@ -1721,13 +1728,13 @@ pub struct ExcludeMemory {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct ExcludeProperty {
     #[yaserde(rename = "ObjectIndex")]
-    pub object_index: Option<u8>,
+    pub object_index: Option<u16>,
     #[yaserde(rename = "ObjectType")]
     pub object_type: Option<u16>,
     #[yaserde(rename = "Occurrence")]
-    pub occurrence: Option<u8>,
+    pub occurrence: Option<u16>,
     #[yaserde(rename = "PropertyId")]
-    pub property_id: u8,
+    pub property_id: u16,
     #[yaserde(rename = "Offset")]
     pub offset: u32,
     #[yaserde(rename = "Size")]
@@ -1805,7 +1812,7 @@ pub struct BusInterface {
     #[yaserde(attribute, rename = "Id")]
     pub id: String,
     #[yaserde(rename = "AddressIndex")]
-    pub address_index: u8,
+    pub address_index: u16,
     #[yaserde(rename = "AccessType")]
     pub access_type: String,
     #[yaserde(attribute, rename = "Text")]
@@ -1905,45 +1912,45 @@ pub struct Options {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct ApplicationProgramStatict {
     #[yaserde(rename = "Code")]
-    pub code: Code,
+    pub code: Option<Code>,
     #[yaserde(rename = "ParameterTypes")]
-    pub parameter_types: ParameterTypes,
+    pub parameter_types: Option<ParameterTypes>,
     #[yaserde(rename = "Parameters")]
-    pub parameters: Parameters,
+    pub parameters: Option<Parameters>,
     #[yaserde(rename = "ParameterRefs")]
-    pub parameter_refs: ParameterRefs,
+    pub parameter_refs: Option<ParameterRefs>,
     #[yaserde(rename = "ParameterCalculations")]
-    pub parameter_calculations: ParameterCalculations,
+    pub parameter_calculations: Option<ParameterCalculations>,
     #[yaserde(rename = "ParameterValidations")]
-    pub parameter_validations: ParameterValidations,
+    pub parameter_validations: Option<ParameterValidations>,
     #[yaserde(rename = "ComObjectTable")]
-    pub com_object_table: ComObjectTable,
+    pub com_object_table: Option<ComObjectTable>,
     #[yaserde(rename = "ComObjectRefs")]
-    pub com_object_refs: ComObjectRefs,
+    pub com_object_refs: Option<ComObjectRefs>,
     #[yaserde(rename = "AddressTable")]
-    pub address_table: AddressTable,
+    pub address_table: Option<AddressTable>,
     #[yaserde(rename = "AssociationTable")]
-    pub association_table: AssociationTable,
+    pub association_table: Option<AssociationTable>,
     #[yaserde(rename = "FixupList")]
-    pub fixup_list: FixupList,
+    pub fixup_list: Option<FixupList>,
     #[yaserde(rename = "LoadProcedures")]
-    pub load_procedures: LoadProcedurest,
+    pub load_procedures: Option<LoadProcedurest>,
     #[yaserde(rename = "Extension")]
-    pub extension: Extension,
+    pub extension: Option<Extension>,
     #[yaserde(rename = "BinaryData")]
-    pub binary_data: BinaryData,
+    pub binary_data: Option<BinaryData>,
     #[yaserde(rename = "DeviceCompare")]
-    pub device_compare: DeviceCompare,
+    pub device_compare: Option<DeviceCompare>,
     #[yaserde(rename = "Messages")]
-    pub messages: Messages,
+    pub messages: Option<Messages>,
     #[yaserde(rename = "Script")]
-    pub script: Script,
+    pub script: Option<Script>,
     #[yaserde(rename = "SecurityRoles")]
-    pub security_roles: SecurityRoles,
+    pub security_roles: Option<SecurityRoles>,
     #[yaserde(rename = "BusInterfaces")]
-    pub bus_interfaces: BusInterfaces,
+    pub bus_interfaces: Option<BusInterfaces>,
     #[yaserde(rename = "Options")]
-    pub options: Options,
+    pub options: Option<Options>,
 }
 
 // ChannelIndependentBlock is registration-relevant list
@@ -1983,7 +1990,7 @@ pub struct ApplicationProgramDynamict {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LoadProcedure {
     #[yaserde(rename = "MergeId")]
-    pub merge_id: Option<u8>,
+    pub merge_id: Option<u16>,
     #[yaserde(flatten)]
     pub load_proceduret: LoadProceduret,
 }
@@ -2017,9 +2024,9 @@ impl Default for LoadProceduret {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct When {
     #[yaserde(rename = "knx:LdCtrlBase")]
-    pub knx_ld_ctrl_base: LdCtrlBaset,
+    pub knx_ld_ctrl_base: Option<LdCtrlBaset>,
     #[yaserde(rename = "choose")]
-    pub choose: LdCtrlBaseChooset,
+    pub choose: Option<LdCtrlBaseChooset>,
     #[yaserde(flatten)]
     pub whent: Whent,
 }
@@ -2028,7 +2035,7 @@ pub struct When {
 #[derive(Debug, Default, Clone, YaDeserialize, YaSerialize, PartialEq)]
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlBaseChooset {
-    #[yaserde(rename = "ParamRefId")]
+    #[yaserde(attribute, rename = "ParamRefId")]
     pub param_ref_id: String,
     #[yaserde(rename = "InternalDescription")]
     pub internal_description: Option<String>,
@@ -2095,11 +2102,11 @@ pub struct ld_ctrl_base {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlUnload {
     #[yaserde(rename = "LsmIdx")]
-    pub lsm_idx: Option<u8>,
+    pub lsm_idx: Option<u16>,
     #[yaserde(rename = "ObjType")]
     pub obj_type: Option<u16>,
     #[yaserde(rename = "Occurrence")]
-    pub occurrence: Option<u8>,
+    pub occurrence: Option<u16>,
     #[yaserde(flatten)]
     pub ld_ctrl_baset: LdCtrlBaset,
 }
@@ -2109,11 +2116,11 @@ pub struct LdCtrlUnload {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlLoad {
     #[yaserde(rename = "LsmIdx")]
-    pub lsm_idx: Option<u8>,
+    pub lsm_idx: Option<u16>,
     #[yaserde(rename = "ObjType")]
     pub obj_type: Option<u16>,
     #[yaserde(rename = "Occurrence")]
-    pub occurrence: Option<u8>,
+    pub occurrence: Option<u16>,
     #[yaserde(flatten)]
     pub ld_ctrl_baset: LdCtrlBaset,
 }
@@ -2123,11 +2130,11 @@ pub struct LdCtrlLoad {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlMaxLength {
     #[yaserde(rename = "LsmIdx")]
-    pub lsm_idx: Option<u8>,
+    pub lsm_idx: Option<u16>,
     #[yaserde(rename = "ObjType")]
     pub obj_type: Option<u16>,
     #[yaserde(rename = "Occurrence")]
-    pub occurrence: Option<u8>,
+    pub occurrence: Option<u16>,
     #[yaserde(rename = "Size")]
     pub size: u32,
     #[yaserde(flatten)]
@@ -2147,11 +2154,11 @@ pub struct LdCtrlClearCachedObjectTypes {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlLoadCompleted {
     #[yaserde(rename = "LsmIdx")]
-    pub lsm_idx: Option<u8>,
+    pub lsm_idx: Option<u16>,
     #[yaserde(rename = "ObjType")]
     pub obj_type: Option<u16>,
     #[yaserde(rename = "Occurrence")]
-    pub occurrence: Option<u8>,
+    pub occurrence: Option<u16>,
     #[yaserde(flatten)]
     pub ld_ctrl_baset: LdCtrlBaset,
 }
@@ -2161,23 +2168,23 @@ pub struct LdCtrlLoadCompleted {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlAbsSegment {
     #[yaserde(rename = "LsmIdx")]
-    pub lsm_idx: Option<u8>,
+    pub lsm_idx: Option<u16>,
     #[yaserde(rename = "ObjType")]
     pub obj_type: Option<u16>,
     #[yaserde(rename = "Occurrence")]
-    pub occurrence: Option<u8>,
+    pub occurrence: Option<u16>,
     #[yaserde(rename = "SegType")]
-    pub seg_type: u8,
+    pub seg_type: u16,
     #[yaserde(rename = "Address")]
     pub address: u16,
     #[yaserde(rename = "Size")]
     pub size: u16,
     #[yaserde(rename = "Access")]
-    pub access: u8,
+    pub access: u16,
     #[yaserde(rename = "MemType")]
-    pub mem_type: u8,
+    pub mem_type: u16,
     #[yaserde(rename = "SegFlags")]
-    pub seg_flags: u8,
+    pub seg_flags: u16,
     #[yaserde(flatten)]
     pub ld_ctrl_baset: LdCtrlBaset,
 }
@@ -2187,17 +2194,17 @@ pub struct LdCtrlAbsSegment {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlRelSegment {
     #[yaserde(rename = "LsmIdx")]
-    pub lsm_idx: Option<u8>,
+    pub lsm_idx: Option<u16>,
     #[yaserde(rename = "ObjType")]
     pub obj_type: Option<u16>,
     #[yaserde(rename = "Occurrence")]
-    pub occurrence: Option<u8>,
+    pub occurrence: Option<u16>,
     #[yaserde(rename = "Size")]
     pub size: u32,
     #[yaserde(rename = "Mode")]
-    pub mode: u8,
+    pub mode: u16,
     #[yaserde(rename = "Fill")]
-    pub fill: u8,
+    pub fill: u16,
     #[yaserde(flatten)]
     pub ld_ctrl_baset: LdCtrlBaset,
 }
@@ -2207,11 +2214,11 @@ pub struct LdCtrlRelSegment {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlTaskSegment {
     #[yaserde(rename = "LsmIdx")]
-    pub lsm_idx: Option<u8>,
+    pub lsm_idx: Option<u16>,
     #[yaserde(rename = "ObjType")]
     pub obj_type: Option<u16>,
     #[yaserde(rename = "Occurrence")]
-    pub occurrence: Option<u8>,
+    pub occurrence: Option<u16>,
     #[yaserde(rename = "Address")]
     pub address: u16,
     #[yaserde(flatten)]
@@ -2223,11 +2230,11 @@ pub struct LdCtrlTaskSegment {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlTaskPtr {
     #[yaserde(rename = "LsmIdx")]
-    pub lsm_idx: Option<u8>,
+    pub lsm_idx: Option<u16>,
     #[yaserde(rename = "ObjType")]
     pub obj_type: Option<u16>,
     #[yaserde(rename = "Occurrence")]
-    pub occurrence: Option<u8>,
+    pub occurrence: Option<u16>,
     #[yaserde(rename = "InitPtr")]
     pub init_ptr: u16,
     #[yaserde(rename = "SavePtr")]
@@ -2243,15 +2250,15 @@ pub struct LdCtrlTaskPtr {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlTaskCtrl1 {
     #[yaserde(rename = "LsmIdx")]
-    pub lsm_idx: Option<u8>,
+    pub lsm_idx: Option<u16>,
     #[yaserde(rename = "ObjType")]
     pub obj_type: Option<u16>,
     #[yaserde(rename = "Occurrence")]
-    pub occurrence: Option<u8>,
+    pub occurrence: Option<u16>,
     #[yaserde(rename = "Address")]
     pub address: u16,
     #[yaserde(rename = "Count")]
-    pub count: u8,
+    pub count: u16,
     #[yaserde(flatten)]
     pub ld_ctrl_baset: LdCtrlBaset,
 }
@@ -2261,11 +2268,11 @@ pub struct LdCtrlTaskCtrl1 {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlTaskCtrl2 {
     #[yaserde(rename = "LsmIdx")]
-    pub lsm_idx: Option<u8>,
+    pub lsm_idx: Option<u16>,
     #[yaserde(rename = "ObjType")]
     pub obj_type: Option<u16>,
     #[yaserde(rename = "Occurrence")]
-    pub occurrence: Option<u8>,
+    pub occurrence: Option<u16>,
     #[yaserde(rename = "Callback")]
     pub callback: u16,
     #[yaserde(rename = "Address")]
@@ -2283,17 +2290,17 @@ pub struct LdCtrlTaskCtrl2 {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlWriteProp {
     #[yaserde(rename = "ObjIdx")]
-    pub obj_idx: Option<u8>,
+    pub obj_idx: Option<u16>,
     #[yaserde(rename = "ObjType")]
     pub obj_type: Option<u16>,
     #[yaserde(rename = "Occurrence")]
-    pub occurrence: Option<u8>,
+    pub occurrence: Option<u16>,
     #[yaserde(rename = "PropId")]
-    pub prop_id: u8,
+    pub prop_id: u16,
     #[yaserde(rename = "StartElement")]
-    pub start_element: Option<u8>,
+    pub start_element: Option<u16>,
     #[yaserde(rename = "Count")]
-    pub count: Option<u8>,
+    pub count: Option<u16>,
     #[yaserde(rename = "Verify")]
     pub verify: bool,
     #[yaserde(rename = "InlineData")]
@@ -2307,17 +2314,17 @@ pub struct LdCtrlWriteProp {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlCompareProp {
     #[yaserde(rename = "ObjIdx")]
-    pub obj_idx: Option<u8>,
+    pub obj_idx: Option<u16>,
     #[yaserde(rename = "ObjType")]
     pub obj_type: Option<u16>,
     #[yaserde(rename = "Occurrence")]
-    pub occurrence: Option<u8>,
+    pub occurrence: Option<u16>,
     #[yaserde(rename = "PropId")]
-    pub prop_id: u8,
+    pub prop_id: u16,
     #[yaserde(rename = "StartElement")]
-    pub start_element: Option<u8>,
+    pub start_element: Option<u16>,
     #[yaserde(rename = "Count")]
-    pub count: Option<u8>,
+    pub count: Option<u16>,
     #[yaserde(flatten)]
     pub ld_ctrl_compare_baset: LdCtrlCompareBaset,
 }
@@ -2327,17 +2334,17 @@ pub struct LdCtrlCompareProp {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlLoadImageProp {
     #[yaserde(rename = "ObjIdx")]
-    pub obj_idx: Option<u8>,
+    pub obj_idx: Option<u16>,
     #[yaserde(rename = "ObjType")]
     pub obj_type: Option<u16>,
     #[yaserde(rename = "Occurrence")]
-    pub occurrence: Option<u8>,
+    pub occurrence: Option<u16>,
     #[yaserde(rename = "PropId")]
-    pub prop_id: u8,
+    pub prop_id: u16,
     #[yaserde(rename = "Count")]
-    pub count: Option<u8>,
+    pub count: Option<u16>,
     #[yaserde(rename = "StartElement")]
-    pub start_element: Option<u8>,
+    pub start_element: Option<u16>,
     #[yaserde(flatten)]
     pub ld_ctrl_baset: LdCtrlBaset,
 }
@@ -2347,13 +2354,13 @@ pub struct LdCtrlLoadImageProp {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlInvokeFunctionProp {
     #[yaserde(rename = "ObjIdx")]
-    pub obj_idx: Option<u8>,
+    pub obj_idx: Option<u16>,
     #[yaserde(rename = "ObjType")]
     pub obj_type: Option<u16>,
     #[yaserde(rename = "Occurrence")]
-    pub occurrence: Option<u8>,
+    pub occurrence: Option<u16>,
     #[yaserde(rename = "PropId")]
-    pub prop_id: u8,
+    pub prop_id: u16,
     #[yaserde(rename = "InlineData")]
     pub inline_data: Option<String>,
     #[yaserde(flatten)]
@@ -2365,13 +2372,13 @@ pub struct LdCtrlInvokeFunctionProp {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlReadFunctionProp {
     #[yaserde(rename = "ObjIdx")]
-    pub obj_idx: Option<u8>,
+    pub obj_idx: Option<u16>,
     #[yaserde(rename = "ObjType")]
     pub obj_type: Option<u16>,
     #[yaserde(rename = "Occurrence")]
-    pub occurrence: Option<u8>,
+    pub occurrence: Option<u16>,
     #[yaserde(rename = "PropId")]
-    pub prop_id: u8,
+    pub prop_id: u16,
     #[yaserde(flatten)]
     pub ld_ctrl_baset: LdCtrlBaset,
 }
@@ -2427,11 +2434,11 @@ pub struct LdCtrlLoadImageMem {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlWriteRelMem {
     #[yaserde(rename = "ObjIdx")]
-    pub obj_idx: Option<u8>,
+    pub obj_idx: Option<u16>,
     #[yaserde(rename = "ObjType")]
     pub obj_type: Option<u16>,
     #[yaserde(rename = "Occurrence")]
-    pub occurrence: Option<u8>,
+    pub occurrence: Option<u16>,
     #[yaserde(rename = "Offset")]
     pub offset: u32,
     #[yaserde(rename = "Size")]
@@ -2449,11 +2456,11 @@ pub struct LdCtrlWriteRelMem {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlCompareRelMem {
     #[yaserde(rename = "ObjIdx")]
-    pub obj_idx: Option<u8>,
+    pub obj_idx: Option<u16>,
     #[yaserde(rename = "ObjType")]
     pub obj_type: Option<u16>,
     #[yaserde(rename = "Occurrence")]
-    pub occurrence: Option<u8>,
+    pub occurrence: Option<u16>,
     #[yaserde(rename = "Offset")]
     pub offset: u32,
     #[yaserde(rename = "Size")]
@@ -2467,11 +2474,11 @@ pub struct LdCtrlCompareRelMem {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlLoadImageRelMem {
     #[yaserde(rename = "ObjIdx")]
-    pub obj_idx: Option<u8>,
+    pub obj_idx: Option<u16>,
     #[yaserde(rename = "ObjType")]
     pub obj_type: Option<u16>,
     #[yaserde(rename = "Occurrence")]
-    pub occurrence: Option<u8>,
+    pub occurrence: Option<u16>,
     #[yaserde(rename = "Offset")]
     pub offset: u32,
     #[yaserde(rename = "Size")]
@@ -2509,9 +2516,9 @@ pub struct LdCtrlRestart {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlMasterReset {
     #[yaserde(rename = "EraseCode")]
-    pub erase_code: u8,
+    pub erase_code: u16,
     #[yaserde(rename = "ChannelNumber")]
-    pub channel_number: u8,
+    pub channel_number: u16,
     #[yaserde(flatten)]
     pub ld_ctrl_baset: LdCtrlBaset,
 }
@@ -2543,7 +2550,7 @@ pub struct LdCtrlSetControlVariable {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlMapError {
     #[yaserde(rename = "LdCtrlFilter")]
-    pub ld_ctrl_filter: Option<u8>,
+    pub ld_ctrl_filter: Option<u16>,
     #[yaserde(rename = "OriginalError")]
     pub original_error: u32,
     #[yaserde(rename = "MappedError")]
@@ -2569,21 +2576,21 @@ pub struct LdCtrlProgressText {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlDeclarePropDesc {
     #[yaserde(rename = "ObjIdx")]
-    pub obj_idx: Option<u8>,
+    pub obj_idx: Option<u16>,
     #[yaserde(rename = "ObjType")]
     pub obj_type: Option<u16>,
     #[yaserde(rename = "Occurrence")]
-    pub occurrence: Option<u8>,
+    pub occurrence: Option<u16>,
     #[yaserde(rename = "PropId")]
-    pub prop_id: u8,
+    pub prop_id: u16,
     #[yaserde(rename = "PropType")]
     pub prop_type: String,
     #[yaserde(rename = "MaxElements")]
-    pub max_elements: u8,
+    pub max_elements: u16,
     #[yaserde(rename = "ReadAccess")]
-    pub read_access: u8,
+    pub read_access: u16,
     #[yaserde(rename = "WriteAccess")]
-    pub write_access: u8,
+    pub write_access: u16,
     #[yaserde(rename = "Writable")]
     pub writable: bool,
     #[yaserde(flatten)]
@@ -2605,7 +2612,7 @@ pub struct LdCtrlClearLCFilterTable {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct LdCtrlMerge {
     #[yaserde(rename = "MergeId")]
-    pub merge_id: u8,
+    pub merge_id: u16,
     #[yaserde(flatten)]
     pub ld_ctrl_baset: LdCtrlBaset,
 }
@@ -2641,7 +2648,7 @@ pub struct BinaryDatat {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct TypeNumber {
     #[yaserde(attribute, rename = "SizeInBit")]
-    pub size_in_bit: u8,
+    pub size_in_bit: u16,
     #[yaserde(attribute, rename = "Type")]
     pub type_attr: String,
     #[yaserde(attribute, rename = "minInclusive")]
@@ -2679,7 +2686,7 @@ pub struct TypeRestriction {
     #[yaserde(attribute, rename = "Base")]
     pub base: String,
     #[yaserde(attribute, rename = "SizeInBit")]
-    pub size_in_bit: u8,
+    pub size_in_bit: u16,
     #[yaserde(attribute, rename = "Offset")]
     pub offset: Vec<u32>,
     #[yaserde(rename = "Enumeration")]
@@ -2702,7 +2709,7 @@ pub struct TypeRestrictionEnumeration {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct TypeText {
     #[yaserde(attribute, rename = "SizeInBit")]
-    pub size_in_bit: u8,
+    pub size_in_bit: u16,
     #[yaserde(rename = "Pattern")]
     pub pattern: Option<String>,
 }
@@ -2712,7 +2719,7 @@ pub struct TypeText {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct TypeTime {
     #[yaserde(rattribute, ename = "SizeInBit")]
-    pub size_in_bit: u8,
+    pub size_in_bit: u16,
     #[yaserde(attribute, rename = "Unit")]
     pub unit: String,
     #[yaserde(attribute, rename = "minInclusive")]
@@ -2766,7 +2773,7 @@ pub struct TypeColor {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct TypeRawData {
     #[yaserde(attribute, rename = "MaxSize")]
-    pub max_size: u8,
+    pub max_size: u16,
 }
 
 // ParameterTypet ...
@@ -2850,9 +2857,9 @@ pub struct UnionParametert {
     #[yaserde(rename = "ParameterType")]
     pub parameter_type: String,
     #[yaserde(rename = "Offset")]
-    pub offset: u8,
+    pub offset: u16,
     #[yaserde(rename = "BitOffset")]
-    pub bit_offset: u8,
+    pub bit_offset: u16,
     #[yaserde(attribute, rename = "Text")]
     pub text: String,
     #[yaserde(rename = "SuffixText")]
@@ -2937,28 +2944,28 @@ pub struct RParameters {
 pub struct ParameterCalculationt {
     #[yaserde(attribute, rename = "Id")]
     pub id: String,
-    #[yaserde(rename = "Language")]
+    #[yaserde(attribute, rename = "Language")]
     pub language: String,
     #[yaserde(attribute, rename = "Name")]
     pub name: String,
-    #[yaserde(rename = "InternalDescription")]
+    #[yaserde(attribute, rename = "InternalDescription")]
     pub internal_description: Option<String>,
-    #[yaserde(rename = "RLTransformationFunc")]
+    #[yaserde(attribute, rename = "RLTransformationFunc")]
     pub rl_transformation_func: Option<String>,
-    #[yaserde(rename = "RLTransformationParameters")]
+    #[yaserde(attribute, rename = "RLTransformationParameters")]
     pub rl_transformation_parameters: Option<String>,
-    #[yaserde(rename = "LRTransformationFunc")]
+    #[yaserde(attribute, rename = "LRTransformationFunc")]
     pub lr_transformation_func: Option<String>,
-    #[yaserde(rename = "LRTransformationParameters")]
+    #[yaserde(attribute, rename = "LRTransformationParameters")]
     pub lr_transformation_parameters: Option<String>,
-    #[yaserde(rename = "RLTransformation")]
-    pub rl_transformation: String,
-    #[yaserde(rename = "LRTransformation")]
-    pub lr_transformation: String,
-    #[yaserde(rename = "LParameters")]
-    pub l_parameters: LParameters,
-    #[yaserde(rename = "TypeNone")]
-    pub type_none: String,
+    #[yaserde(attribute, rename = "RLTransformation")]
+    pub rl_transformation: Option<String>,
+    #[yaserde(attribute, rename = "LRTransformation")]
+    pub lr_transformation: Option<String>,
+    #[yaserde(attribute, rename = "LParameters")]
+    pub l_parameters: Option<LParameters>,
+    #[yaserde(attribute, rename = "TypeNone")]
+    pub type_none: Option<String>,
 }
 
 // ParameterValidationt ...
@@ -2991,29 +2998,29 @@ pub struct ComObjectt {
     pub text: String,
     #[yaserde(attribute, rename = "Number")]
     pub number: u32,
-    #[yaserde(rename = "FunctionText")]
+    #[yaserde(attribute, rename = "FunctionText")]
     pub function_text: String,
-    #[yaserde(rename = "Priority")]
+    #[yaserde(attribute, rename = "Priority")]
     pub priority: Option<String>,
-    #[yaserde(rename = "ObjectSize")]
+    #[yaserde(attribute, rename = "ObjectSize")]
     pub object_size: String,
-    #[yaserde(rename = "ReadFlag")]
+    #[yaserde(attribute, rename = "ReadFlag")]
     pub read_flag: String,
-    #[yaserde(rename = "WriteFlag")]
+    #[yaserde(attribute, rename = "WriteFlag")]
     pub write_flag: String,
-    #[yaserde(rename = "CommunicationFlag")]
+    #[yaserde(attribute, rename = "CommunicationFlag")]
     pub communication_flag: String,
-    #[yaserde(rename = "TransmitFlag")]
+    #[yaserde(attribute, rename = "TransmitFlag")]
     pub transmit_flag: String,
-    #[yaserde(rename = "UpdateFlag")]
+    #[yaserde(attribute, rename = "UpdateFlag")]
     pub update_flag: String,
-    #[yaserde(rename = "ReadOnInitFlag")]
+    #[yaserde(attribute, rename = "ReadOnInitFlag")]
     pub read_on_init_flag: String,
-    #[yaserde(rename = "DatapointType")]
-    pub datapoint_type: Vec<String>,
-    #[yaserde(rename = "InternalDescription")]
+    #[yaserde(attribute, rename = "DatapointType")]
+    pub datapoint_type: Option<String>,
+    #[yaserde(attribute, rename = "InternalDescription")]
     pub internal_description: Option<String>,
-    #[yaserde(rename = "SecurityRequired")]
+    #[yaserde(attribute, rename = "SecurityRequired")]
     pub security_required: Option<String>,
 }
 
@@ -3063,7 +3070,7 @@ pub struct Whent {
 #[derive(Debug, Default, Clone, YaDeserialize, YaSerialize, PartialEq)]
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct ComObjectParameterChooset {
-    #[yaserde(rename = "ParamRefId")]
+    #[yaserde(attribute, rename = "ParamRefId")]
     pub param_ref_id: String,
     #[yaserde(rename = "InternalDescription")]
     pub internal_description: Option<String>,
@@ -3128,7 +3135,7 @@ pub struct Columns {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct ComObjectParameterBlockt {
     #[yaserde(attribute, rename = "Id")]
-    pub id: String,
+    pub id: Option<String>,
     #[yaserde(attribute, rename = "Name")]
     pub name: Option<String>,
     #[yaserde(attribute, rename = "Text")]
@@ -3139,7 +3146,7 @@ pub struct ComObjectParameterBlockt {
     pub help_topic: Option<u32>,
     #[yaserde(rename = "InternalDescription")]
     pub internal_description: Option<String>,
-    #[yaserde(rename = "ParamRefId")]
+    #[yaserde(attribute, rename = "ParamRefId")]
     pub param_ref_id: Option<String>,
     #[yaserde(rename = "TextParameterRefId")]
     pub text_parameter_ref_id: Option<String>,
@@ -3156,9 +3163,9 @@ pub struct ComObjectParameterBlockt {
     #[yaserde(rename = "ShowInComObjectTree")]
     pub show_in_com_object_tree: Option<bool>,
     #[yaserde(rename = "Rows")]
-    pub rows: Rows,
+    pub rows: Option<Rows>,
     #[yaserde(rename = "Columns")]
-    pub columns: Columns,
+    pub columns: Option<Columns>,
     #[yaserde(rename = "ParameterBlock")]
     pub parameter_block: Vec<ComObjectParameterBlockt>,
     #[yaserde(rename = "ParameterSeparator")]
@@ -3254,7 +3261,7 @@ pub struct ParameterRefReft {
     #[yaserde(rename = "HelpContext")]
     pub help_context: Option<String>,
     #[yaserde(rename = "IndentLevel")]
-    pub indent_level: Option<u8>,
+    pub indent_level: Option<u16>,
     #[yaserde(rename = "InternalDescription")]
     pub internal_description: Option<String>,
     #[yaserde(rename = "Cell")]
@@ -3329,7 +3336,7 @@ pub struct Assignt {
 #[derive(Debug, Default, Clone, YaDeserialize, YaSerialize, PartialEq)]
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct ChannelChooset {
-    #[yaserde(rename = "ParamRefId")]
+    #[yaserde(attribute, rename = "ParamRefId")]
     pub param_ref_id: String,
     #[yaserde(rename = "InternalDescription")]
     pub internal_description: Option<String>,
@@ -3341,7 +3348,7 @@ pub struct ChannelChooset {
 #[derive(Debug, Default, Clone, YaDeserialize, YaSerialize, PartialEq)]
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct DependentChannelChooset {
-    #[yaserde(rename = "ParamRefId")]
+    #[yaserde(attribute, rename = "ParamRefId")]
     pub param_ref_id: String,
     #[yaserde(rename = "InternalDescription")]
     pub internal_description: Option<String>,
@@ -3528,7 +3535,7 @@ pub struct RegistrationInfot {
     #[yaserde(rename = "OriginalRegistrationNumber")]
     pub original_registration_number: Option<String>,
     #[yaserde(rename = "RegistrationDate")]
-    pub registration_date: Option<u8>,
+    pub registration_date: Option<u16>,
     #[yaserde(rename = "RegistrationSignature")]
     pub registration_signature: Option<String>,
     #[yaserde(rename = "RegistrationKey")]
@@ -3630,7 +3637,7 @@ pub struct LanguageDatat {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct HistoryEntry {
     #[yaserde(rename = "Date")]
-    pub date: u8,
+    pub date: u16,
     #[yaserde(rename = "User")]
     pub user: Option<String>,
     #[yaserde(attribute, rename = "Text")]
@@ -3684,13 +3691,13 @@ pub struct ProjectInformation {
     #[yaserde(rename = "ContractNumber")]
     pub contract_number: Option<String>,
     #[yaserde(rename = "LastModified")]
-    pub last_modified: Option<u8>,
+    pub last_modified: Option<u16>,
     #[yaserde(rename = "ProjectStart")]
-    pub project_start: Option<u8>,
+    pub project_start: Option<u16>,
     #[yaserde(rename = "ProjectEnd")]
-    pub project_end: Option<u8>,
+    pub project_end: Option<u16>,
     #[yaserde(rename = "ProjectId")]
-    pub project_id: Option<u8>,
+    pub project_id: Option<u16>,
     #[yaserde(rename = "ProjectPassword")]
     pub project_password: Option<String>,
     #[yaserde(rename = "Comment")]
@@ -3728,13 +3735,13 @@ pub struct Installation {
     #[yaserde(attribute, rename = "Name")]
     pub name: String,
     #[yaserde(rename = "InstallationId")]
-    pub installation_id: Option<u8>,
+    pub installation_id: Option<u16>,
     #[yaserde(rename = "BCUKey")]
     pub bcu_key: Option<u64>,
     #[yaserde(rename = "IPRoutingMulticastAddress")]
     pub ip_routing_multicast_address: Option<String>,
     #[yaserde(rename = "MulticastTTL")]
-    pub multicast_ttl: Option<u8>,
+    pub multicast_ttl: Option<u16>,
     #[yaserde(rename = "IPRoutingBackboneKey")]
     pub ip_routing_backbone_key: Option<String>,
     #[yaserde(rename = "IPRoutingLatencyTolerance")]
@@ -3846,7 +3853,7 @@ pub struct Line {
     #[yaserde(attribute, rename = "Name")]
     pub name: String,
     #[yaserde(rename = "Address")]
-    pub address: u8,
+    pub address: u16,
     #[yaserde(rename = "MediumTypeRefId")]
     pub medium_type_ref_id: String,
     #[yaserde(rename = "Comment")]
@@ -3876,7 +3883,7 @@ pub struct Area {
     #[yaserde(attribute, rename = "Name")]
     pub name: String,
     #[yaserde(rename = "Address")]
-    pub address: u8,
+    pub address: u16,
     #[yaserde(rename = "Comment")]
     pub comment: Option<String>,
     #[yaserde(rename = "CompletionStatus")]
@@ -3936,7 +3943,7 @@ pub struct ChannelInstances {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct Address {
     #[yaserde(rename = "Address")]
-    pub address: u8,
+    pub address: u16,
     #[yaserde(attribute, rename = "Name")]
     pub name: Option<String>,
     #[yaserde(rename = "Description")]
@@ -3966,13 +3973,13 @@ pub struct DeviceInstancet {
     #[yaserde(rename = "Hardware2ProgramRefId")]
     pub hardware2_program_ref_id: Option<String>,
     #[yaserde(rename = "Address")]
-    pub address: Option<u8>,
+    pub address: Option<u16>,
     #[yaserde(rename = "Comment")]
     pub comment: Option<String>,
     #[yaserde(rename = "LastModified")]
-    pub last_modified: Option<u8>,
+    pub last_modified: Option<u16>,
     #[yaserde(rename = "LastDownload")]
-    pub last_download: Option<u8>,
+    pub last_download: Option<u16>,
     #[yaserde(rename = "LastUsedAPDULength")]
     pub last_used_apdu_length: Option<u16>,
     #[yaserde(rename = "ReadMaxAPDULength")]
@@ -4038,7 +4045,7 @@ pub struct Role {
     #[yaserde(attribute, rename = "RefId")]
     pub ref_id: String,
     #[yaserde(rename = "Address")]
-    pub address: u8,
+    pub address: u16,
 }
 
 // Securityt ...
@@ -4066,7 +4073,7 @@ pub struct Securityt {
     #[yaserde(rename = "SequenceNumber")]
     pub sequence_number: Option<u64>,
     #[yaserde(rename = "SequenceNumberTimestamp")]
-    pub sequence_number_timestamp: Option<u8>,
+    pub sequence_number_timestamp: Option<u16>,
     #[yaserde(rename = "Role")]
     pub role: Role,
 }
@@ -4242,7 +4249,7 @@ pub struct GroupAddresst {
     #[yaserde(attribute, rename = "Id")]
     pub id: String,
     #[yaserde(rename = "Address")]
-    pub address: u8,
+    pub address: u16,
     #[yaserde(attribute, rename = "Name")]
     pub name: String,
     #[yaserde(rename = "Unfiltered")]
@@ -4386,7 +4393,7 @@ pub struct Tradet {
 #[yaserde(namespace = "http://knx.org/xml/project/20")]
 pub struct ProjectTracet {
     #[yaserde(rename = "Date")]
-    pub date: u8,
+    pub date: u16,
     #[yaserde(rename = "UserName")]
     pub user_name: String,
     #[yaserde(rename = "Comment")]
